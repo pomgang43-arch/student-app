@@ -1,0 +1,21 @@
+{
+  "name": "Student Portal - ผดุงเสนา",
+  "short_name": "Student App",
+  "description": "ระบบนักศึกษา วิทยาลัยเทคโนโลยีผดุงเสนาบริหารธุรกิจ",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#d1d5db",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/T31k1y70/images-(1).jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://i.postimg.cc/T31k1y70/images-(1).jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
