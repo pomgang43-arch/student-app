@@ -20,6 +20,7 @@
 
 <body class="text-gray-800 antialiased flex justify-center min-h-screen">
     
+    <!-- แจ้งเตือนเมื่อได้รับการอนุมัติ -->
     <div id="paymentNotification" class="fixed top-4 left-4 right-4 z-50 hidden">
         <div class="bg-green-600 text-white p-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-green-500">
             <div class="text-3xl">🎉</div>
@@ -35,6 +36,7 @@
         <div class="absolute inset-0 bg-white/40 backdrop-blur-[2px] z-0"></div>
         <div class="relative z-10 flex-1 flex flex-col p-6 overflow-y-auto">
 
+            <!-- หน้า Login -->
             <div id="loginSection" class="flex flex-col justify-center flex-1">
                 <div class="text-center mb-8">
                     <img id="appLogo" onclick="handleLogoClick()" src="https://i.postimg.cc/T31k1y70/images-(1).jpg" class="w-24 h-auto mx-auto mb-4 cursor-pointer hover:scale-105 transition-transform drop-shadow-md rounded-xl">
@@ -55,6 +57,7 @@
                 </div>
             </div>
 
+            <!-- หน้าเปลี่ยนรหัสผ่าน -->
             <div id="changePassSection" class="hidden flex-col justify-center flex-1">
                 <div class="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-orange-200">
                     <div class="text-center mb-5"><span class="text-4xl">🔐</span><h2 class="text-lg font-semibold mt-2">ตั้งรหัสผ่านใหม่</h2></div>
@@ -65,6 +68,7 @@
                 </div>
             </div>
 
+            <!-- หน้า Profile หลัก -->
             <div id="profileSection" class="hidden pb-10 flex-col">
                 <div class="bg-indigo-600/90 text-white p-6 rounded-2xl shadow-lg mb-6 relative mt-4 backdrop-blur-md border border-indigo-500">
                     <button onclick="doLogout()" class="absolute top-4 right-4 bg-indigo-500/80 p-2 rounded-lg text-xs hover:bg-indigo-400 transition">ออกจากระบบ</button>
@@ -79,6 +83,7 @@
                     <div class="text-center mt-1"><span class="text-sm text-indigo-100" id="profileId">-</span><span class="text-xs ml-2 bg-indigo-800/60 px-2 py-0.5 rounded-full text-indigo-100" id="profileMajor">-</span></div>
                 </div>
 
+                <!-- Section: การเงิน -->
                 <h3 class="font-medium text-gray-900 mb-3 flex items-center gap-2 mt-6">💳 ชำระค่าลงทะเบียน/ค่าเทอม</h3>
                 <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl p-5 mb-6 shadow-md">
                     <div class="flex justify-between items-end mb-5 bg-indigo-50 p-4 rounded-lg border border-indigo-100">
@@ -109,6 +114,15 @@
                             <div class="flex justify-between mb-3 text-gray-500"><span>ค่าธรรมเนียม:</span><span id="summaryFee">0.00 ฿</span></div>
                             <div class="flex justify-between font-bold text-lg text-indigo-700 border-t border-gray-200 pt-2 mt-1"><span>ยอดรวม:</span><span id="summaryTotal">0.00 ฿</span></div>
                         </div>
+
+                        <!-- เพิ่มปุ่มคัดลอกบันทึกช่วยจำตรงนี้ -->
+                        <div class="mb-5 bg-indigo-50 p-3 rounded-xl border border-indigo-100">
+                            <p class="text-[11px] text-gray-600 mb-2 text-center">เพื่อความรวดเร็ว กรุณาคัดลอกข้อความด้านล่างไปวางในช่อง <br><b>"บันทึกช่วยจำ"</b> ของแอปธนาคารก่อนโอนเงิน</p>
+                            <button onclick="copyMemoText()" id="btnCopyMemo" class="w-full bg-white hover:bg-gray-50 text-indigo-700 font-medium py-2.5 rounded-lg border border-indigo-200 transition text-sm flex items-center justify-center gap-2 shadow-sm">
+                                📋 คัดลอกรหัสและเทอม
+                            </button>
+                        </div>
+
                         <div class="flex justify-center mb-4"><img id="qrImage" class="w-56 h-56 border border-gray-200 p-2 bg-white rounded-xl shadow-sm"></div>
                         <div class="mb-6"><a id="btnDownloadQR" href="#" download="PaymentQR.jpg" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center py-2.5 rounded-xl border border-gray-300 font-medium transition">💾 บันทึกรูปภาพ QR Code</a></div>
                         
@@ -121,9 +135,11 @@
                     </div>
                 </div>
 
+                <!-- Section: ประวัติชำระเงิน -->
                 <h3 class="font-medium text-gray-900 mb-3 mt-6">🕰️ ประวัติการชำระเงิน</h3>
                 <div id="paymentHistoryList" class="space-y-3 mb-6"></div>
 
+                <!-- Section: สถิติและพฤติกรรม -->
                 <h3 class="font-medium text-gray-900 mb-3 mt-6">📊 สถิติการเข้าเรียน & พฤติกรรม</h3>
                 <div class="bg-white/95 border border-gray-100 rounded-xl p-4 mb-6 shadow-md"><div class="grid grid-cols-2 text-center divide-x divide-gray-200">
                     <div><p class="text-xs text-gray-500 bg-gray-100 py-1 rounded mx-2 mb-2">เฉพาะเดือนนี้</p><p class="text-sm">สาย <span id="statLateMonth" class="text-orange-500 font-bold text-lg">0</span> | ขาด <span id="statAbsentMonth" class="text-red-500 font-bold text-lg">0</span></p></div>
@@ -134,6 +150,7 @@
         </div>
     </div>
 
+    <!-- ส่วนของการทำงาน JavaScript -->
     <script>
         // 🔴🔴 เปลี่ยนลิงก์ API ล่าสุด และ เลขพร้อมเพย์วิทยาลัย ตรงนี้ครับ 🔴🔴
         const API_URL = "https://script.google.com/macros/s/AKfycbw3ibsPQiUQiRphWlVAywacAg8itEApGB0m2CBCWaQJmNU0hwY68hyVcvP_eCLO2w8j0g/exec"; 
@@ -144,19 +161,8 @@
         let globalSys = { semester: "1", year: "2569" };
 
         async function callAPI(payload) {
-            try { 
-                let res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) }); 
-                let text = await res.text(); // แอบดูข้อความดิบๆ ก่อน
-                try {
-                    return JSON.parse(text); // แปลงเป็นข้อมูลปกติ
-                } catch (e) {
-                    alert("เซิร์ฟเวอร์ตอบกลับผิดปกติ: " + text.substring(0, 100)); // แจ้งเตือนถ้า Google ส่ง Error กลับมา
-                    return { success: false, message: "เชื่อมต่อไม่สำเร็จ" };
-                }
-            } catch (err) { 
-                alert("เกิดปัญหาฝั่งผู้ใช้: " + err.message);
-                return { success: false, message: "เชื่อมต่อไม่สำเร็จ" }; 
-            }
+            try { let res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); return await res.json(); } 
+            catch (err) { return { success: false, message: "เชื่อมต่อไม่สำเร็จ" }; }
         }
 
         async function doLogin() {
@@ -224,8 +230,34 @@
             
             let qr = `https://promptpay.io/${PROMPTPAY_ID}/${total}.png`;
             document.getElementById('qrImage').src = qr; document.getElementById('btnDownloadQR').href = qr;
+            
+            // คืนค่าปุ่มคัดลอกให้เป็นสถานะปกติก่อนโชว์
+            resetCopyButton();
+            
             document.getElementById('qrSection').classList.remove('hidden');
             setTimeout(() => { document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth' }); }, 100);
+        }
+
+        // ฟังก์ชันสำหรับคัดลอกข้อความ
+        function copyMemoText() {
+            let memo = `รหัส:${tempStudentData.profile.id} เทอม:${globalSys.semester}/${globalSys.year}`;
+            navigator.clipboard.writeText(memo).then(() => {
+                let btn = document.getElementById('btnCopyMemo');
+                btn.innerHTML = '✅ คัดลอกแล้ว! นำไปวางในแอปธนาคารได้เลย';
+                btn.classList.replace('bg-white', 'bg-green-50');
+                btn.classList.replace('text-indigo-700', 'text-green-700');
+                btn.classList.replace('border-indigo-200', 'border-green-300');
+            }).catch(err => {
+                alert("อุปกรณ์ไม่รองรับการคัดลอกอัตโนมัติ กรุณาพิมพ์: " + memo);
+            });
+        }
+
+        // ฟังก์ชันรีเซ็ตปุ่มคัดลอกกลับเป็นเหมือนเดิม
+        function resetCopyButton() {
+            let btn = document.getElementById('btnCopyMemo');
+            btn.innerHTML = '📋 คัดลอกรหัสและเทอม';
+            btn.classList.remove('bg-green-50', 'text-green-700', 'border-green-300');
+            btn.classList.add('bg-white', 'text-indigo-700', 'border-indigo-200');
         }
 
         async function handleSlipUpload(event) {
@@ -243,7 +275,7 @@
                     let res = await callAPI({ action: 'uploadPaymentSlip', studentId: tempStudentData.profile.id, semester: globalSys.semester, year: globalSys.year, amountDeduct: parseFloat(document.getElementById('payAmount').value), feePaid: SYSTEM_FEE, dataURI: b64, filename: `slip_${tempStudentData.profile.id}.jpg` });
                     if (res.success) { 
                         msg.innerText = "✅ ส่งหลักฐานสำเร็จ! รอตรวจสอบ"; msg.className = "text-sm text-center mt-3 text-green-600 font-medium"; 
-                        alert("อัปโหลดสลิปเรียบร้อย ระบบจะหักยอดคงค้างเมื่อการเงินอนุมัติครับ");
+                        alert("อัปโหลดสลิปเรียบร้อย ระบบจะสรุปยอดเมื่อการเงินอนุมัติครับ");
                         document.getElementById('qrSection').classList.add('hidden'); document.getElementById('payAmount').value=''; loadPaymentHistory(tempStudentData.profile.id); 
                     } else { alert("เกิดข้อผิดพลาด: " + res.message); msg.classList.add('hidden'); }
                 }; img.src = e.target.result;
