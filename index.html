@@ -233,6 +233,7 @@
         }
 
         function showProfile(data) {
+            alert("ยอดเงินที่ระบบได้รับคือ: " + JSON.stringify(data.financial));
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('profileSection').classList.remove('hidden');
             document.getElementById('profileSection').classList.add('flex');
