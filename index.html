@@ -238,9 +238,14 @@
             setTimeout(() => { document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth' }); }, 100);
         }
 
-        // ฟังก์ชันสำหรับคัดลอกข้อความ
+        // ฟังก์ชันสำหรับคัดลอกข้อความ (ปรับปรุงใหม่เพื่อรองรับข้อจำกัด 20 ตัวอักษรของ Krungthai Next)
         function copyMemoText() {
-            let memo = `รหัส:${tempStudentData.profile.id} เทอม:${globalSys.semester}/${globalSys.year}`;
+            // ดึงปี พ.ศ. เฉพาะ 2 ตัวท้าย เช่น จาก 2569 ย่อเหลือ 69
+            let shortYear = globalSys.year.toString().slice(-2); 
+            
+            // จัดฟอร์แมตแบบย่อพิเศษให้มีความยาวปลอดภัยที่สุด
+            let memo = `${tempStudentData.profile.id} เทอม${globalSys.semester}/${shortYear}`; 
+            
             navigator.clipboard.writeText(memo).then(() => {
                 let btn = document.getElementById('btnCopyMemo');
                 btn.innerHTML = '✅ คัดลอกแล้ว! นำไปวางในแอปธนาคารได้เลย';
